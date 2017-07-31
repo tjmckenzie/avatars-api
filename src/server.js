@@ -17,7 +17,7 @@ const faviconPath = path.join(basePath, 'src', 'favicon.ico');
 
 app.use(favicon(faviconPath));
 app.get('/', function(req, res) {
-  return res.redirect('http://avatars.adorable.io');
+  return res.redirect('/avatars/tjmckenzie');
 });
 
 if (process.env.NODE_ENV === 'production') {
