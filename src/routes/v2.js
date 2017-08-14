@@ -9,6 +9,7 @@ import { combine } from '../lib/imager';
 import potato from '../lib/potato';
 
 const partTypes = ['eyes', 'nose', 'mouth'];
+const transparentColor = 'rgba(255, 255, 255, 0)';
 
 // eslint-disable-next-line new-cap
 const router = Router();
@@ -36,14 +37,29 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+router.get('/t/:id', function(req, res, next) {
+  req.faceParts.color = transparentColor;
+  return combine(req.faceParts, function(err, stdout) {
+    return common.sendImage(err, stdout, req, res, next);
+  });
+});
+
 router.get('/:size/:id', function(req, res, next) {
   return combine(req.faceParts, req.params.size, function(err, stdout) {
     return common.sendImage(err, stdout, req, res, next);
   });
 });
 
+router.get('/t/:size/:id', function(req, res, next) {
+  req.faceParts.color = transparentColor;
+  return combine(req.faceParts, req.params.size, function(err, stdout) {
+    return common.sendImage(err, stdout, req, res, next);
+  });
+});
+
 router.get('/face/:eyes/:nose/:mouth/:color', function(req, res, next) {
-  let faceParts = { color: '#' + req.params.color };
+  let chosenColor = req.params.color === 'transparent' ? transparentColor : '#' + req.params.color;
+  let faceParts = { color:  chosenColor };
 
   partTypes.forEach(function(type) {
     const possibleFileNames = allNames(type);

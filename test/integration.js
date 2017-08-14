@@ -27,7 +27,7 @@ describe('routing', function() {
 
   describe('root', function() {
     it('redirects to the one-pager', function(done) {
-      request.get('/').expect(302).expect('location', 'http://avatars.adorable.io').end(done);
+      request.get('/').expect(302).expect('location', '/avatars/tjmckenzie').end(done);
     });
   });
 
@@ -62,6 +62,27 @@ describe('routing', function() {
 
     it('can manually compose an image', function(done) {
       request.get('/avatars/face/eyes1/nose4/mouth11/bbb')
+      .expect(200)
+      .expect('Content-Type', /image/)
+      .end(done);
+    });
+
+    it('can set a default transparent background', function(done) {
+      request.get('/avatars/t/abott')
+      .expect(200)
+      .expect('Content-Type', /image/)
+      .end(done);
+    });
+
+    it('can set a size and default transparent background', function(done) {
+      request.get('/avatars/t/220/abott')
+      .expect(200)
+      .expect('Content-Type', /image/)
+      .end(done);
+    });
+
+    it('can manually set transparent background', function(done) {
+      request.get('/avatars/face/eyes1/nose4/mouth11/transparent')
       .expect(200)
       .expect('Content-Type', /image/)
       .end(done);
