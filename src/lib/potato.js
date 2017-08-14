@@ -4,16 +4,15 @@ import { allPaths }       from './imageFiles';
 import SlotMachine      from './slotMachine';
 
 const colors = [
-  'rgba(255,255,255,0)',
-  // '#81bef1',
-  // '#ad8bf2',
-  // '#bff288',
-  // '#de7878',
-  // '#a5aac5',
-  // '#6ff2c5',
-  // '#f0da5e',
-  // '#eb5972',
-  // '#f6be5d',
+  '#81bef1',
+  '#ad8bf2',
+  '#bff288',
+  '#de7878',
+  '#a5aac5',
+  '#6ff2c5',
+  '#f0da5e',
+  '#eb5972',
+  '#f6be5d',
 ];
 
 class Potato {
